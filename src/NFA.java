@@ -8,7 +8,7 @@ class NFA {
 
     /**
      *
-     * @param move 转台转移表
+     * @param move 状态转移表
      * @param accept_state 接受状态集合
      * @param word 待判断字符串
      * @return 是否能被NFA所识别
@@ -27,6 +27,7 @@ class NFA {
             oldStateSet.push(i);
         }
 
+        //核心部分，将当前状态向前推进 S = ε-clouser(move(S,c)的具体实现
         for (int i = 0; i < word.length(); i++) {
             while (!oldStateSet.empty()) {
                 int s = oldStateSet.peek();
@@ -44,6 +45,7 @@ class NFA {
             }
         }
 
+        //查看最终状态集合中是否含有接受状态
         while (!oldStateSet.empty()) {
             int s = oldStateSet.pop();
             for (int i = 0; i < accept_state.length; ++i) {
@@ -55,6 +57,7 @@ class NFA {
         return false;
     }
 
+    //将新状态压入newsStateSet
     private void addState(int i, int move[][][]) {
         if (!alreadyOn[i]) {
             newStateSet.push(i);
@@ -66,33 +69,6 @@ class NFA {
             }
         }
     }
-
-//    private Vector<Integer> closure(int[] init_state, int move[][][]) {
-//        Vector<Integer> result = new Vector<>();
-//        Stack<Integer> s = new Stack<>();
-//        boolean[] added = new boolean[50];
-//        for (int i = 0; i < 50; ++i) {
-//            added[i] = false;
-//        }
-//        for (int i = 0; i < init_state.length; i++) {
-//            s.push(init_state[i]);
-//            result.add(init_state[i]);
-//            added[init_state[i]] = true;
-//        }
-//        while (!s.empty()) {
-//            int top = s.pop();
-//            for (int i = 0; i < move[top][0].length; i++) {
-//                if (!added[move[top][0][i]]) {
-//                    s.push(top);
-//                    added[move[top][0][i]] = true;
-//                    result.add(top);
-//                }
-//            }
-//        }
-//        return result;
-//    }
-
-
 
     public static void main(String args[]) throws IOException {
         int n, m;
