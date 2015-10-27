@@ -2,8 +2,17 @@ import java.util.*;
 import java.io.*;
 
 class DFA {
+    /**
+     *
+     * @param move 状态转移表
+     * @param accept_state 接受状态集合
+     * @param word 要匹配的字符串
+     * @return 匹配结果
+     */
     boolean recognizeString(int move[][], int accept_state[], String word) {
+        //初始状态
         int nextState = 0;
+        //更新状态
         for (int i = 0; i < word.length(); i++) {
             nextState = move[nextState][word.charAt(i) - 'a'];
         }

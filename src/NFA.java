@@ -27,7 +27,7 @@ class NFA {
             oldStateSet.push(i);
         }
 
-        //核心部分，将当前状态向前推进 S = ε-clouser(move(S,c)的具体实现
+        //核心部分，将当前状态向前推进 S = ε-clouser(move(S,c))的具体实现
         for (int i = 0; i < word.length(); i++) {
             while (!oldStateSet.empty()) {
                 int s = oldStateSet.peek();
