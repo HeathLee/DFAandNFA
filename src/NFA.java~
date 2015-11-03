@@ -22,6 +22,10 @@ class NFA {
         }
 
         //构造初始状态集合s0
+        //oldStateSet.push(0);
+        /*for (int i : move[0][0]) {
+            oldStateSet.push(i);
+        }*/
         addState(0, move);
 
         //核心部分，将当前状态向前推进 S = ε-clouser(move(S,c))的具体实现
